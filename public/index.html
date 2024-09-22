@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flores Amarillas</title>
+    <style>
+        body {
+            background-color: #f5f5dc; /* Beige */
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #e67300;
+            font-size: 3rem;
+            margin-top: 50px;
+        }
+
+        #flower-container {
+            position: relative;
+            width: 100%;
+            height: 80vh;
+            overflow: hidden;
+        }
+
+        .flower {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            animation: float 5s infinite ease-in-out; /* Animación más rápida */
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-200vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .flower img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tal vez no sean reales, pero no te quedas sin tus flores amarillas<br>Te amo <3</h1>
+    <div id="flower-container"></div>
+
+    <script>
+        // URLs de imágenes de flores
+        const flowers = [
+            'https://static.vecteezy.com/system/resources/previews/009/383/908/non_2x/sunflower-clipart-design-illustration-free-png.png',
+            'https://static.wikia.nocookie.net/plantas-contra-zombis-1/images/e/e9/Girasol.png/revision/latest?cb=20201020124615&path-prefix=es',
+            'https://static.wikia.nocookie.net/plantas-contra-zombis-1/images/e/e9/Girasol.png/revision/latest?cb=20201020124615&path-prefix=es'
+        ];
+
+        // Función para generar una flor
+        function createFlower() {
+            const flowerContainer = document.getElementById('flower-container');
+            const flowerDiv = document.createElement('div');
+            flowerDiv.classList.add('flower');
+            
+            const flowerImg = document.createElement('img');
+            flowerImg.src = flowers[Math.floor(Math.random() * flowers.length)];
+
+            // Posición aleatoria
+            flowerDiv.style.left = Math.random() * window.innerWidth + 'px';
+            flowerDiv.appendChild(flowerImg);
+            flowerContainer.appendChild(flowerDiv);
+
+            // Eliminar la flor después de la animación
+            setTimeout(() => {
+                flowerDiv.remove();
+            }, 3000); // Coincide con la duración de la animación
+        }
+
+        // Función para generar múltiples flores al mismo tiempo
+        function createMultipleFlowers() {
+            const numberOfFlowers = Math.floor(Math.random() * 3) + 3; // Generar entre 3 y 5 flores
+            for (let i = 0; i < numberOfFlowers; i++) {
+                createFlower();
+            }
+        }
+
+        // Generar múltiples flores cada 500ms
+        setInterval(createMultipleFlowers, 500); // Intervalo para mayor frecuencia
+    </script>
+</body>
+</html>
